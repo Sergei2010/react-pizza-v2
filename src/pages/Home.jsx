@@ -5,8 +5,10 @@ import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
 import Sceleton from '../components/PizzaBlock/Sceleton'
 import Pagination from '../components/Pagination';
+import { SearchContext } from '../App';
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+	const { searchValue } = React.useContext(SearchContext);
 	const [items, setItems] = React.useState([]);
 	const [currentPage, setCurrentPage] = React.useState(1)
 	const [isLoading, setIsLoading] = React.useState(true);
