@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // useSelector == useContext
 // useDispatch -> ВЫПОЛНИТЬ
-import axios from 'axios'
-
+import axios from 'axios';
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import Sort from '../components/Sort';
 import Categories from '../components/Categories';
@@ -24,6 +23,10 @@ const Home = () => {
 	const onChangePage = (number) => {
 		dispatch(setCurrentPage(number));
 	}
+	// const [categoryId, setCategoryId] = React.useState(0);
+	/* const [sortType, setSortType] = React.useState(
+		{ name: 'популярности', sortProperty: 'raiting' }
+	); */
 
 	React.useEffect(() => {
 		setIsLoading(true);
