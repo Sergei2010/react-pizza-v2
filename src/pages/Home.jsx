@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // useSelector == useContext
 // useDispatch -> ВЫПОЛНИТЬ
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
@@ -82,7 +82,11 @@ const Home = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-	const pizzas = items.map((item) => <PizzaBlock key={ item.id } { ...item } />);
+	const pizzas = items.map((item) => (
+		<Link to={ `/pizza/${item.id}` } key={ item.id }>
+			<PizzaBlock  { ...item } />
+		</Link>
+	));
 	const skeletons = [...new Array(6)].map((_, i) => (<Sceleton key={ i } />));
 
 	return (
@@ -96,7 +100,15 @@ const Home = () => {
 			</div>
 			<h2 className="content__title">Все пиццы</h2>
 			<div className="content__items">
-				{ status === 'loading' ? skeletons : pizzas }
+				{/* 	{ status === 'loading' ? skeletons : pizzas } */ }
+				{ status === 'error' ? (
+					<div className="content__error-info">
+						<h2>Произошла ошибка 😕</h2>
+						<p>К сожалению, не удалось получить питсы. Попробуйте повторить попытку позже.</p>
+					</div>
+				) : (
+					<div className="content__items">{ status === 'loading' ? skeletons : pizzas }</div>
+				) }
 			</div>
 			<Pagination currentPage={ currentPage } onChangePage={ onChangePage } />
 		</div>
