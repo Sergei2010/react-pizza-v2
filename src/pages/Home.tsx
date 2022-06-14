@@ -64,7 +64,6 @@ const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, currentPage]);
 
   // если был первый рендер, то проверяю URL-параметры и передаю данные в Redux
@@ -81,13 +80,11 @@ const Home: React.FC = () => {
       );
       isSearch.current = true;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // усли был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
     getPizzas();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   const pizzas = items.map((item: any) => (
