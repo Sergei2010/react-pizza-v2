@@ -1,5 +1,5 @@
-import React from "react"
-import ContentLoader from "react-content-loader"
+import React from 'react';
+import ContentLoader from 'react-content-loader';
 
 const Sceleton = () => (
 	<ContentLoader
@@ -23,6 +23,6 @@ const Sceleton = () => (
 		<rect x="13" y="409" rx="6" ry="6" width="142" height="23" />
 		<rect x="174" y="402" rx="19" ry="19" width="100" height="36" />
 	</ContentLoader>
-)
+);
 
 export default Sceleton;

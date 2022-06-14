@@ -18,7 +18,6 @@ const Search: React.FC = () => {
   };
 
   // вернёт ф-ию 1раз без пересоздания
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateSearchValue = React.useCallback(
     debounce((str) => {
       dispatch(setSearchValue(str));
