@@ -5,14 +5,10 @@ import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  FilterSliceState,
-  selectFilter,
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
-} from '../redux/slices/filterSlice';
-import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../redux/slices/pizzaSlice';
+import { setCategoryId, setCurrentPage, setFilters } from '../redux/filter/slice';
+import { selectFilter } from '../redux/filter/selectors';
+import { selectPizzaData } from '../redux/pizza/slice';
+import { fetchPizzas } from '../redux/pizza/asyncActions';
 import Sort, { sortList } from '../components/Sort';
 import Categories from '../components/Categories';
 import PizzaBlock from '../components/PizzaBlock';
@@ -29,9 +25,12 @@ const Home: React.FC = () => {
   const { items, status } = useSelector(selectPizzaData);
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
-  const onChangeCategory = (idx: number) => {
+  /*  const onChangeCategory = (idx: number) => {
     dispatch(setCategoryId(idx));
-  };
+  }; */
+  const onChangeCategory = React.useCallback((idx: number) => {
+    dispatch(setCategoryId(idx));
+  }, []);
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
@@ -55,7 +54,7 @@ const Home: React.FC = () => {
   };
 
   // если был первый рендер и изменили параметры
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     if (isMounted.current) {
       const queryString = qs.stringify({
         sortProperty: sort.sortProperty,
@@ -68,7 +67,7 @@ const Home: React.FC = () => {
     if (!window.location.search) {
       dispatch(fetchPizzas({} as SearchPizzaParams));
     }
-  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]); */
 
   // усли был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
@@ -76,7 +75,7 @@ const Home: React.FC = () => {
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
   // если был первый рендер, то проверяю URL-параметры и передаю данные в Redux
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
       // console.log('params:', params)
@@ -92,7 +91,7 @@ const Home: React.FC = () => {
       isMounted.current = true;
     }
   }, []);
-
+ */
   const pizzas = items.map((item: any) => <PizzaBlock key={item.id} {...item} />);
   const skeletons = [...new Array(6)].map((_, i) => <Sceleton key={i} />);
 
@@ -100,7 +99,7 @@ const Home: React.FC = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
