@@ -9,11 +9,14 @@ import { setCategoryId, setCurrentPage, setFilters } from '../redux/filter/slice
 import { selectFilter } from '../redux/filter/selectors';
 import { selectPizzaData } from '../redux/pizza/slice';
 import { fetchPizzas } from '../redux/pizza/asyncActions';
-import Sort, { sortList } from '../components/Sort';
-import Categories from '../components/Categories';
-import PizzaBlock from '../components/PizzaBlock';
-import Sceleton from '../components/PizzaBlock/Sceleton';
-import Pagination from '../components/Pagination';
+// import Sort, { sortList } from '../components/Sort';
+// import Categories from '../components/Categories';
+// import PizzaBlock from '../components/PizzaBlock';
+// import Sceleton from '../components/PizzaBlock/Sceleton';
+// import Pagination from '../components/Pagination';
+
+import { Sort, Categories, PizzaBlock, Sceleton, Pagination } from '../components';
+
 import { useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
