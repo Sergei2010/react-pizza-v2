@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const Sceleton = () => (
+export const Sceleton = () => (
 	<ContentLoader
 		className="pizza-block"
 		speed={ 2 }
@@ -24,5 +24,3 @@ const Sceleton = () => (
 		<rect x="174" y="402" rx="19" ry="19" width="100" height="36" />
 	</ContentLoader>
 );
-
-export default Sceleton;

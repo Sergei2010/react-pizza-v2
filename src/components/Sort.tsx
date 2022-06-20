@@ -2,7 +2,7 @@ import React from 'react';
 // import useWhyDidYouUpdate from 'ahooks/lib/useWhyDidYouUpdate';
 import { useDispatch } from 'react-redux';
 import { setSort } from '../redux/filter/slice';
-import { SortPropertyEnum, Sort } from '../redux/filter/types';
+import { SortPropertyEnum, Sort as SortType } from '../redux/filter/types';
 
 type SortItem = {
   name: string;
@@ -13,7 +13,7 @@ type PopupClick = MouseEvent & {
 };
 
 type SortPopupProps = {
-  value: Sort;
+  value: SortType;
 };
 export const sortList: SortItem[] = [
   { name: 'популярности (DESC)', sortProperty: SortPropertyEnum.RAITING_DECK },
@@ -24,7 +24,7 @@ export const sortList: SortItem[] = [
   { name: 'алфавиту (ASC)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
+export const Sort: React.FC<SortPopupProps> = React.memo(({ value }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -81,5 +81,3 @@ const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
     </div>
   );
 });
-
-export default SortPopup;
